@@ -25,6 +25,8 @@ In this project, you can build your own C++ application or extend this Snake gam
 
 ## Basic Build Instructions
 
+**This project is developed in ubuntu 16.04**
+
 1. Clone this repo.
 2. Make a build directory in the top level directory: `mkdir build && cd build`
 3. Compile: `cmake .. && make`
@@ -34,18 +36,18 @@ In this project, you can build your own C++ application or extend this Snake gam
 
 ### Prize, more than just food
 Right now we have different type of food, I call it prize, there are different types:
-1. Speed Down - reduce speed
-2. Size Shrink - reduce the size
-3. Score More - add more score
-4. Food - the normal prize add length of the snake
-5. Wall - add a wall in board
-6. Invincible - add a invincible status for the snake, in that status, snake won die
+1. Speed Down, color Red- reduce speed
+2. Size Shrink, color Green - reduce the size
+3. Score More, color yellow - add more score
+4. Food, color pink - the normal prize add length of the snake
+5. Wall, color blue - add a wall in board
+6. Invincible, color light yellow - add a invincible status for the snake, in that status, snake won die
 
 ### Wall
-Right now we will have 0-3 walls in the board. One wall will be randomly placed on the board if eaten the wall prize. If snake into a wall, game over
+Right now we will have 0-4 walls in the board, Wall will be dark bule in board. One wall will be randomly placed on the board if eaten the wall prize. If snake into a wall, game over
 
 ### Invincible
-If eaten the invincible prize, the snake wont die in next 5 seconds.
+If eaten the invincible prize, the snake wont die in next 5 seconds. When snake in invincible mode, the body will be light yellow.
 
 ## New files
 
