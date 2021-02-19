@@ -29,3 +29,47 @@ In this project, you can build your own C++ application or extend this Snake gam
 2. Make a build directory in the top level directory: `mkdir build && cd build`
 3. Compile: `cmake .. && make`
 4. Run it: `./SnakeGame`.
+
+## New Feature
+
+### Prize, more than just food
+Right now we have different type of food, I call it prize, there are different types:
+1. Speed Down - reduce speed
+2. Size Shrink - reduce the size
+3. Score More - add more score
+4. Food - the normal prize add length of the snake
+5. Wall - add a wall in board
+6. Invincible - add a invincible status for the snake, in that status, snake won die
+
+### Wall
+Right now we will have 0-3 walls in the board. One wall will be randomly placed on the board if eaten the wall prize. If snake into a wall, game over
+
+### Invincible
+If eaten the invincible prize, the snake wont die in next 5 seconds.
+
+## New files
+
+I have introduced there new classes into the code:
+1. board: used to help maintain and validate positions in the board
+2. prize: used to implement prize feature
+3. wall: used to implement wall features
+
+## Project requirements
+### Memory Requirements
+#### references
+in game.h two function Place and PrizeUpdate used reference in arguements
+
+#### destructors
+in game.h used destructors
+
+#### rule of 5
+in wall.h used rule of 5
+
+#### move semantics
+in game.h and board.h, used move semantics to move wall into board
+
+#### smart pointers
+in game.cpp, wall is used in unique_ptr
+
+### Concurrency
+in game.cpp, used thread for invicible 5 seconds

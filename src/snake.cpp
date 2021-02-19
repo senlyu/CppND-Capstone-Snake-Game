@@ -2,7 +2,7 @@
 #include <cmath>
 #include <iostream>
 
-void Snake::Update() {
+void Snake::Update(bool* invincibleSnake) {
   SDL_Point prev_cell{
       static_cast<int>(head_x),
       static_cast<int>(
@@ -15,7 +15,7 @@ void Snake::Update() {
   // Update all of the body vector items if the snake head has moved to a new
   // cell.
   if (current_cell.x != prev_cell.x || current_cell.y != prev_cell.y) {
-    UpdateBody(current_cell, prev_cell);
+    UpdateBody(current_cell, prev_cell, invincibleSnake);
   }
 }
 
@@ -43,27 +43,35 @@ void Snake::UpdateHead() {
   head_y = fmod(head_y + grid_height, grid_height);
 }
 
-void Snake::UpdateBody(SDL_Point &current_head_cell, SDL_Point &prev_head_cell) {
+void Snake::UpdateBody(SDL_Point &current_head_cell, SDL_Point &prev_head_cell, bool* invincibleSnake) {
   // Add previous head location to vector
   body.push_back(prev_head_cell);
 
-  if (!growing) {
+  if (growing==0) {
     // Remove the tail from the vector.
     body.erase(body.begin());
+  } else if (growing<0) {
+    // if shrink delete twice
+    body.erase(body.begin());
+    body.erase(body.begin());
+    size--;
+    growing++;
   } else {
-    growing = false;
+    growing--;
     size++;
   }
 
   // Check if the snake has died.
-  for (auto const &item : body) {
-    if (current_head_cell.x == item.x && current_head_cell.y == item.y) {
-      alive = false;
+  if (!(*invincibleSnake)) {
+    for (auto const &item : body) {
+      if (current_head_cell.x == item.x && current_head_cell.y == item.y) {
+        alive = false;
+      }
     }
   }
 }
 
-void Snake::GrowBody() { growing = true; }
+void Snake::GrowBody(int size) { growing = growing + size; }
 
 // Inefficient method to check if cell is occupied by snake.
 bool Snake::SnakeCell(int x, int y) {
